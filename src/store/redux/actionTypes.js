@@ -2,3 +2,8 @@
 export const COUNT_DECREASE = 'COUNT_DECREASE'
 
 export const COUNT_INCREASE = 'COUNT_INCREASE'
+
+// weather
+export const UPDATE_CITY_LIST = 'UPDATE_CITY_LIST'
+export const UPDATE_WEATHER = 'UPDATE_WEATHER'
+export const UPDATE_QUALITY = 'UPDATE_QUALITY'

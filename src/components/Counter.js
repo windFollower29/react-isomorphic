@@ -30,13 +30,10 @@ export default class Counter extends Component {
   }
 
   decrease = () => {
-    console.log(this.props)
     this.props.decrease()
   }
   
   increase = () => {
-    debugger
-    // console.log(this.props)
     this.props.increase()
   }
 }

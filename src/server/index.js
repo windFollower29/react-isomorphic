@@ -3,6 +3,8 @@
 // })
 
 require('./app.js')
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 // import app from './app.js'
 

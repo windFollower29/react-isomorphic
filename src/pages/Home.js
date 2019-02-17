@@ -10,6 +10,7 @@ export default class Home extends Component {
   }
 
   render () {
+    console.log(`-----isServer: ${SERVER}--`)
     return (
       <React.Fragment>
 
@@ -31,7 +32,6 @@ export default class Home extends Component {
     let p = document.createElement('p')
     p.textContent = 'componentDidMount触发生成'
     this.rootDom.append(p)
-
     // 'window' in global && console.log(`--${JSON.stringify(window)}---`)
   }
 }

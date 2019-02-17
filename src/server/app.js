@@ -4,6 +4,7 @@ const path = require('path')
 const Koa = require('koa')
 const serve = require('koa-static')
 import views from 'koa-views'
+import logger from 'koa-logger'
 import favicon from 'koa-favicon'
 
 import apiController from './controllers/api-controller'
@@ -14,12 +15,14 @@ const app = new Koa()
 
 app.use(serve('./public'))
 
-app.use(favicon(__dirname + '../favicon.ico'))
+app.use(favicon(path.resolve(__dirname, '../favicon.ico')))
 
 app.use(async (ctx, next) => {
   await next()
   // console.log('koa')
 })
+
+app.use(logger())
 
 // 模板引擎
 app.use(views(path.resolve('./src/views'), {

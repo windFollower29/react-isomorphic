@@ -14,31 +14,35 @@ const Home = loadable(() => import("../pages/Home"))
 const About = loadable(() => import("../pages/About"))
 const NotFound = loadable(() => import("../pages/NotFound"))
 
+import { renderRoutes } from 'react-router-config'
 import routes from '../routes'
 
 export default class Layout extends Component {
 
   render () {
+
+    // console.log('dom: ', routes )
+    let dom = renderRoutes(routes)
     
     return (
 
       <div>
 
-        {/* {renderRoutes(routes)} */}
-
         <ul className="nav">
           <Link to="/">Index</Link> 
           <Link to="/home">Home</Link> 
           <Link to="/about">About</Link>
+          <Link to="/weather">WeatherPage</Link>
         </ul>
 
         <hr/>
 
         <Switch>
 
-          {
+          {dom}
 
-            routes.map((route, idx) => {
+          {/* {
+            routes[0].routes.map((route, idx) => {
               return (
                 <Route 
                   key={route.key || route.path}
@@ -49,8 +53,7 @@ export default class Layout extends Component {
                 
               )
             })
-
-          }
+          } */}
 
           {/* <Route path='/home' render={props => <Home {...props} />} />
           <Route path='/about' render={props => <About {...props} />} />

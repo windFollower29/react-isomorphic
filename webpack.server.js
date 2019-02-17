@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 const merge = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
@@ -30,9 +31,10 @@ const serverConf = {
                 // "useBuiltIns": true,
                 // useBuiltIns: "usage",
                 "targets": {
-                    "node": "current"  // node支持的不转码
-                  }
-                }
+                  // "browsers": ["IE >= 9.0"],
+                  "node": "current"  // node支持的不转码
+                },
+              }
             ],
             '@babel/preset-react'
           ],
@@ -40,14 +42,28 @@ const serverConf = {
             ["@babel/plugin-proposal-decorators", { "legacy": true }],
             ["@babel/plugin-proposal-class-properties", { "loose" : true }],
             "dynamic-import-node",
-            "@loadable/babel-plugin"
+            "@loadable/babel-plugin",
+            // "@babel/plugin-transform-async-to-generator"
+            [
+              "@babel/plugin-transform-runtime",
+              // {
+              //   "corejs": false,
+              //   "helpers": true,
+              //   "regenerator": true,
+              //   "useESModules": false
+              // }
+            ]
           ]
         }
       }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin([ "./build" ])
+    new CleanWebpackPlugin([ "./build" ]),
+    new webpack.DefinePlugin({
+      SERVER: JSON.stringify(true),
+      CLIENT: JSON.stringify(false)
+    })
   ],
   externals: [nodeExternals()],
   node: {
