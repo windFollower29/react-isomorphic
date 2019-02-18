@@ -33,6 +33,8 @@ export default class Layout extends Component {
           <Link to="/home">Home</Link> 
           <Link to="/about">About</Link>
           <Link to="/weather">WeatherPage</Link>
+          <Link to="/needAuth">needAuth</Link>
+          <Link to="/login">login</Link>
         </ul>
 
         <hr/>

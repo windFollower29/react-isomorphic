@@ -26,7 +26,7 @@ export default async function render (routes, ctx, context = {}, initStore = {})
 
   store.subscribe(() => {
     let state = store.getState()
-    console.log('sotre: ', state)
+    // console.log('sotre: ', state)
   })
 
   // 各组件获取初始化数据 TODO: 加上鉴权

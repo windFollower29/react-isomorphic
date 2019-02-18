@@ -6,6 +6,7 @@ const initState = {
   count: 0,
 
   weather: {
+    refetchFlag: true,       // ssr获取数据后csr接管首次不重复请求数据的标识
     cityList: [],
     weather: null,
     quality: null
@@ -28,9 +29,12 @@ function counter (count = initState.count, action) {
 
 }
 
-function weather (weather = initState.weather, {type, payload}) {
+function weather (weather = initState.weather, { type, payload }) {
 
   switch (type) {
+
+    case ActionTypes.REFETCH:
+      return { ...weather, refetchFlag: payload }
 
     case ActionTypes.UPDATE_CITY_LIST:
       let res = { ...weather, cityList: payload }

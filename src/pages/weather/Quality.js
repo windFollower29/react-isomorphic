@@ -5,16 +5,19 @@ import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
 
 import { 
-  fetchCityListAndQuality
+  fetchCityListAndQuality,
+  setRefetchFlag
 } from '../../store/redux/actions'
 
 @withRouter
 @connect(
   state => ({
+    refetchFlag: state.weather.refetchFlag,
     quality: state.weather.quality
   }),
   dispatch => ({
-    fetchCityListAndQuality: () => dispatch(fetchCityListAndQuality())
+    fetchCityListAndQuality: () => dispatch(fetchCityListAndQuality()),
+    setRefetchFlag : () => dispatch(setRefetchFlag(true))
   })
 )
 export default class Quality extends Component {
@@ -43,10 +46,17 @@ export default class Quality extends Component {
 
   componentDidMount () {
 
-    const { location: { search }, fetchCityListAndQuality } = this.props
+    const {
+      location: { search },
+      refetchFlag,
+      fetchCityListAndQuality,
+      setRefetchFlag
+    } = this.props
 
     const { location: city } = queryString.parse(search)
 
-    fetchCityListAndQuality(city || undefined)
+    refetchFlag 
+      ? fetchCityListAndQuality(city || undefined)
+      : setRefetchFlag()
   }
 }

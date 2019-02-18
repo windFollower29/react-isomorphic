@@ -5,7 +5,8 @@ import {
   COUNT_INCREASE,
   UPDATE_CITY_LIST,
   UPDATE_WEATHER,
-  UPDATE_QUALITY
+  UPDATE_QUALITY,
+  REFETCH
 } from './actionTypes'
 
 import ajax from '../../client/services/ajax'
@@ -14,6 +15,11 @@ const {
   fetchTemperature,
   fetchQuality
 } = ajax
+
+
+export function setRefetchFlag (flag) {
+  return { type: REFETCH, payload: flag }
+}
 
 export function countDecrease () {
   return { type: COUNT_DECREASE }
@@ -43,11 +49,9 @@ export function fetchCityListAndTemperature (city) {
     return fetchCityList(city)
       .then(data => {
 
-        // dispatch(updateCityList(data))
-
         return fetchTemperature(data[0].location)
           .then(res => {
-            // console.log(data, res)
+
             dispatch(updateWeather(res.daily_forecast))
             dispatch(updateCityList(data))
           })
@@ -72,22 +76,3 @@ export function fetchCityListAndQuality (city) {
     
   }
 }
-
-
-// export function getCityList (location = 'guangzhou') {
-
-//   const cityApi = `https://search.heweather.net/find?parameters&key=HE1902161002471051&location=${location}`
-
-//   return (dispatch, getState) => {
-
-//     return fetch(cityApi)
-//       .then(res => res.json())
-//       .then(res => {
-//         const data = res.HeWeather6[0].basic
-//         // console.log('cityApi', data)
-        
-//         dispatch(updateCityList(data))
-//       })
-//   }
-
-// }

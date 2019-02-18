@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 
 // import { observer } from 'mobx-react'
+import { connect } from 'react-redux'
 
 import { COUNT_DECREASE, COUNT_INCREASE } from '../store/redux/actionTypes'
-import { connect } from 'react-redux'
+
+import {
+  countDecrease
+} from '../store/redux/actions'
 
 @connect(
   state => ({
     count: state.count
   }),
   dispatch => ({
-    decrease: () => dispatch({ type: COUNT_DECREASE }),
+    decrease: () => dispatch(countDecrease()),
     increase: () => dispatch({ type: COUNT_INCREASE })
   })
 )

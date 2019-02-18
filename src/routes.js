@@ -20,8 +20,11 @@ const WeatherPage = loadable(() => import("./pages/weather/Index"))
 const Weather = loadable(() => import("./pages/weather/Weather"))
 const Detail = loadable(() => import("./pages/weather/Detail"))
 const NotFound = loadable(() => import("./pages/NotFound"))
+const NeedAuth = loadable(() => import('./pages/NeedAuth'))
+const Login = loadable(() => import('./pages/Login'))
 
-import { 
+import {
+  setRefetchFlag,
   fetchCityListAndTemperature,
   fetchCityListAndQuality
 } from './store/redux/actions'
@@ -61,6 +64,9 @@ export default [
 
               let promise = store.dispatch(fetchCityListAndQuality(city || undefined))
 
+              let promise2 = store.dispatch(setRefetchFlag(false))
+
+              return Promise.all([promise, promise2])
               return promise
             },
           },
@@ -71,7 +77,10 @@ export default [
               const city = (query || '').split('=')[1]
 
               let promise = store.dispatch(fetchCityListAndTemperature(city || undefined))
-              // ajax.fetchTemperature()
+              
+              let promise2 = store.dispatch(setRefetchFlag(false))
+
+              return Promise.all([promise, promise2])
               return promise
             },
           },
@@ -85,6 +94,14 @@ export default [
           //   },
           // }
         ]
+      },
+      {
+        path: '/needAuth',
+        component: NeedAuth
+      },
+      {
+        path: '/login',
+        component: Login
       },
       {
         path: '/',

@@ -1,3 +1,4 @@
+export const REFETCH = 'REFETCH'
 
 export const COUNT_DECREASE = 'COUNT_DECREASE'
 

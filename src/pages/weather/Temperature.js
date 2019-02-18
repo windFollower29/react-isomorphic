@@ -5,16 +5,22 @@ import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
 
 import { 
-  fetchCityListAndTemperature
+  fetchCityListAndTemperature,
+  setRefetchFlag
 } from '../../store/redux/actions'
 
+import Auth from '../../components/Auth'
+
 @withRouter
+// @Auth
 @connect(
   state => ({
+    refetchFlag: state.weather.refetchFlag,
     weather: state.weather.weather
   }),
   dispatch => ({
-    fetchCityListAndTemperature: () => dispatch(fetchCityListAndTemperature())
+    fetchCityListAndTemperature: () => dispatch(fetchCityListAndTemperature()),
+    setRefetchFlag : () => dispatch(setRefetchFlag(true))
   })
 )
 export default class Temperature extends Component {
@@ -31,7 +37,8 @@ export default class Temperature extends Component {
         <ul>
           {
             // TODO: 是否都要做兜底处理
-            weather && weather.map((item, idx) => (
+            weather && 
+            weather.map((item, idx) => (
               <li key={idx}>{item.cond_txt_d}</li>
             ))
           }
@@ -43,14 +50,16 @@ export default class Temperature extends Component {
   componentDidMount () {
     const { 
       location: { search },
+      refetchFlag,
       fetchCityListAndTemperature,
-      weather
+      setRefetchFlag
     } = this.props
 
     const { location: city } = queryString.parse(search)
 
-    !weather &&
-    fetchCityListAndTemperature(city || undefined)
-
+    refetchFlag 
+      ? fetchCityListAndTemperature(city || undefined)
+      : setRefetchFlag()
+    
   }
 }
