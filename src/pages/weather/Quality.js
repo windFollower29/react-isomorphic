@@ -18,14 +18,8 @@ import {
   })
 )
 export default class Quality extends Component {
-  constructor (props) {
-    super(props)
-    console.log('constructor')
-  }
 
   render () {
-
-    console.log(`quality---`)
 
     const { quality } = this.props
 
@@ -35,6 +29,7 @@ export default class Quality extends Component {
         <div>quality</div>
 
         {
+          quality &&
           ['pm25', 'qlty'].map(item => (
             <div key={item}>
               <label>{item}：</label>

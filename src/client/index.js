@@ -47,7 +47,7 @@ const App = () => {
 
 // hydrate复用服务端渲染api
 loadableReady().then(() => {
-console.log('------')
+  
   ReactDom.hydrate(<App />, document.getElementById('app'))
   // ReactDom.render(<App />, document.getElementById('app'))
 })

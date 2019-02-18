@@ -53,9 +53,4 @@ export default class Temperature extends Component {
     fetchCityListAndTemperature(city || undefined)
 
   }
-
-  shouldComponentUpdate (props, state) {
-    console.log()
-    return true
-  }
 }

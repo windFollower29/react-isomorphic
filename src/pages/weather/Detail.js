@@ -12,16 +12,10 @@ import Quality from './Quality'
 @withRouter
 export default class Detail extends Component {
 
-  state = {
-    // showQuality: false
-  }
-
   render () {
 
     const { match, location, history } = this.props
     const { params: { city }, url, path } = match
-console.log('detail')
-    const showQuality = url.includes('quality')
 
     return (
 
@@ -33,17 +27,12 @@ console.log('detail')
         <ul>
           {/* <li><a href="/weather/temperature">温度</a></li>
           <li><a href="/weather/quality">空气质量</a></li> */}
-          <Link to={`/weather/quality`}>空气</Link>
 
           <button onClick={this.goto.bind(this, 'temperature')}>温度</button>
           <button onClick={this.goto.bind(this, 'quality')}>空气质量</button>
         </ul>
 
         <div>
-
-          {/* {
-            showQuality ? <Quality /> : <Temperature />
-          } */}
 
         {renderRoutes(this.props.route.routes)}
 
@@ -63,13 +52,12 @@ console.log('detail')
 
     this.props.history.push({
       pathname: `/weather/${str}`,
-      // search: `?location=${city || ''}`,
+      search: `?location=${city || ''}`,
     })
   }
 
   componentDidMount() {
 
-    
   }
 
 }
