@@ -85,9 +85,9 @@ const clientConf = {
     ]
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: 'index.html'
-    // }),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    }),
     new CleanWebpackPlugin([ "./public" ]),
     new webpack.DefinePlugin({
       CLIENT: JSON.stringify(true),

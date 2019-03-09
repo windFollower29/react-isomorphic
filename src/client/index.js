@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDom from 'react-dom'
 
 import { BrowserRouter , Route, Switch, Link } from 'react-router-dom'
-import{ renderRoutes } from 'react-router-config'
 
 import { loadableReady } from '@loadable/component'
 
@@ -27,11 +26,10 @@ console.log(preloadedState)
 // delete window.__PRELOADED_STATE__
 
 // Create Redux store with initial state
-// const store = createStore(preloadedState)
 const store = createStore(preloadedState)
 
 const App = () => {
-  // console.log(`------${JSON.stringify(store)}---------`)
+
   return (
     <Provider store={store}>
 
@@ -49,7 +47,5 @@ const App = () => {
 loadableReady().then(() => {
   
   ReactDom.hydrate(<App />, document.getElementById('app'))
-  // ReactDom.render(<App />, document.getElementById('app'))
-})
 
-// console.log(`--${JSON.stringify(window)}---`)
+})

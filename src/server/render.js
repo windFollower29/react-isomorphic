@@ -3,50 +3,45 @@ import path from 'path'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter, Route, Switch, Link } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 
 // import { Provider } from 'mobx-react'
 import { Provider } from 'react-redux'
 import { matchRoutes } from 'react-router-config'
 import { Helmet } from 'react-helmet'
 
-import Layout from '../common/Layout'
-
-// import counterStore from '../store/index'
+import routes from '../routes'
 import createStore from '../store/redux/index'
-// const createStore = require('../store/redux/index')
-// const store = createStore()
+import Layout from '../common/Layout'
 
 import { ChunkExtractor } from '@loadable/server'
 
-// import routes from '../routes'
 
-export default async function render (routes, ctx, context = {}, initStore = {}) {
+export default async function render (ctx, context = {}, initStore = {}) {
   const store = createStore({ count: 29 })
 
-  store.subscribe(() => {
-    let state = store.getState()
-    // console.log('sotre: ', state)
-  })
+  // store.subscribe(() => {
+  //   let state = store.getState()
+  //   // console.log('sotre: ', state)
+  // })
 
   // 各组件获取初始化数据 TODO: 加上鉴权
-  // const branch = matchRoutes(routes, ctx.req.url)
   const [url, query] = ctx.req.url.split('?')
+
+  console.log('url', url)
   const branch = matchRoutes(routes, url)
 
   const promises = branch.map(({ route, match, location, history }) => {
-    // console.log(`--route: ${JSON.stringify(route)}------`)
+
     return route.asyncData
       ? route.asyncData(store, query)
       : Promise.resolve(null)
   })
 
   let res = await Promise.all(promises)
-  console.log(`----${res}-----`)
 
   // 模板
   const App = () => {
-  // debugger
+
     return (
       <Provider store={store}>
 
@@ -120,24 +115,5 @@ export default async function render (routes, ctx, context = {}, initStore = {})
       </body>
     </html>
   `
-  // return `
-  //   <html>
-  //     <head>
-  //       ${helmet.title.toString()}
-  //       ${helmet.meta.toString()}
-  //     </head>
-  //     <body>
-  //       <div id="app">${content}</div>
-  //       <script>
-  //         window.STORE = 'love'
-  //       </script>
-
-  //       ${scriptTags}
-
-  //       \<!-- TODO: 动态加载bundle \-->
-  //       \<!-- <script src="/index.bundle.js"></script> \-->
-  //     </body>
-  //   </html>
-  // `
 
 }

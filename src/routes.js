@@ -10,15 +10,12 @@ import loadable from '@loadable/component'
 // import About from './pages/About'
 // import NotFound from './pages/NotFound'
 
-const Root = loadable(() => import('./pages/Root'))
+const Root = loadable((props) => import('./pages/Root'))
 const Index = loadable(() => import("./pages/Index"))
 const Home = loadable(() => import("./pages/Home"))
 const About = loadable(() => import("./pages/About"))
 const WeatherPage = loadable(() => import("./pages/weather/Index"))
 
-// import WeatherPage from './pages/weather/Index'
-const Weather = loadable(() => import("./pages/weather/Weather"))
-const Detail = loadable(() => import("./pages/weather/Detail"))
 const NotFound = loadable(() => import("./pages/NotFound"))
 const NeedAuth = loadable(() => import('./pages/NeedAuth'))
 const Login = loadable(() => import('./pages/Login'))

@@ -1,9 +1,5 @@
 import Router from 'koa-router'
 
-// import { matchRoutes } from 'react-router-config'
-
-import routes from '../../routes'
-
 import render from '../render'
 
 const router = new Router({
@@ -12,7 +8,7 @@ const router = new Router({
 
 router.all('*', async (ctx, next) => {
 
-  const html = await render(routes, ctx)
+  const html = await render(ctx)
 
   ctx.body = html
 

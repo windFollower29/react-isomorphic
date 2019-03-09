@@ -13,7 +13,7 @@ export default (Child) => {
     }
     
     return (
-      <Child {...this.props} />
+      <Child {...props} />
     )
     
   }
