@@ -1,3 +1,7 @@
+## 运行
+`npm run dev`执行客户端、服务端的文件打包，完成后再运行`node build/server.js`启动后台服务，浏览器打开`localhost:5000`
+
+
 ## TODO LIST
 - [] 如何解决ssr的初始数据在csr接管后重复请求的问题
 - [] 前后端路由加入鉴权（路由导航卫士？）
